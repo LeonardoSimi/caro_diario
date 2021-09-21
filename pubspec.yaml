@@ -61,6 +61,7 @@ flutter:
   assets:
     - assets/privacy_policy.txt
     - assets/images/carodiarioUNC.gif
+    - assets/images/paper-clip.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

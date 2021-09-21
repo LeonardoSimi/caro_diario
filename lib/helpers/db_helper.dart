@@ -9,7 +9,7 @@ class DBHelper {
         onCreate: (db, version) {
       print('db creato');
           return db.execute(
-              'CREATE TABLE user_diary(id TEXT, title TEXT, body TEXT, date TEXT)');
+              'CREATE TABLE user_diary(id TEXT, title TEXT, body TEXT, date TEXT, picture TEXT)');
         }, version: 2);
   }
 

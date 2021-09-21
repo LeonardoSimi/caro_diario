@@ -5,31 +5,32 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 import '../models/DPage.dart';
 import '../helpers/db_helper.dart';
 
 class DiaryList with ChangeNotifier {
-
   List<DPage> _pages = [];
 
   List<DPage> get pages {
     return [..._pages];
   }
 
-  Future<void> addPage(
-      String nId, String nTitle, String nBody, String dateTime) async {
+  late String imagePath;
+
+  Future<void> addPage(String nId, String nTitle, String nBody, String dateTime,) async {
     final db = await DBHelper.database();
     DateTime now = DateTime.now();
     String dateTimeFormatted =
         DateFormat('dd-MM-yyyy,  \n          kk:mm').format(now);
     final newPage = DPage(
-      //TODO id
       title: nTitle,
       pageBody: nBody,
       dateTime: dateTimeFormatted,
       id: nId,
+      pic: imagePath,
     );
     _pages.add(newPage);
     notifyListeners();
@@ -38,8 +39,9 @@ class DiaryList with ChangeNotifier {
       'body': newPage.pageBody,
       'date': newPage.dateTime,
       'id': newPage.id,
+      'picture': newPage.pic
     });
-    print('added page with title ${newPage.title}, ${newPage.id}');
+    print('added page with title ${newPage.title}, ${newPage.id}, ${newPage.pic}');
   }
 
   Future<void> fetchAndSetPages() async {
@@ -51,6 +53,7 @@ class DiaryList with ChangeNotifier {
               title: item['title'],
               pageBody: item['body'],
               dateTime: item['date'],
+              pic: item['picture'],
             ))
         .toList();
     notifyListeners();
@@ -62,5 +65,9 @@ class DiaryList with ChangeNotifier {
     print('deleted page from db');
     await db.rawDelete('DELETE FROM $table WHERE id = ?', [pageId]);
   }
-}
 
+  getImagePath(XFile image) {
+    imagePath = image.path;
+    print(imagePath);
+  }
+}
