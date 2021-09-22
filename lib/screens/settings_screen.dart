@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './privacy_policy_screen.dart';
 import './auth_screen.dart';
 import './main_diary_screen.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings_screen';
@@ -67,6 +68,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //bottomNavigationBar: BottomNavBar(),
       appBar: AppBar(
         title: Text('Settings'),
       ),

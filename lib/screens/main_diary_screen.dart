@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
@@ -12,8 +13,15 @@ import './page_details_screen.dart';
 import './all_diary_screen.dart';
 import './settings_screen.dart';
 
-class MainDiaryScreen extends StatelessWidget {
+class MainDiaryScreen extends StatefulWidget {
   static const routeName = '/main-diary-screen';
+
+  @override
+  _MainDiaryScreenState createState() => _MainDiaryScreenState();
+}
+
+class _MainDiaryScreenState extends State<MainDiaryScreen> {
+  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +29,7 @@ class MainDiaryScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Center(
             child: Text(
@@ -32,7 +41,7 @@ class MainDiaryScreen extends StatelessWidget {
         backgroundColor: null,
         foregroundColor: null,
       ),
-      bottomNavigationBar: BottomNavBar(),
+      //bottomNavigationBar: BottomNavBar(),
       body: FutureBuilder(
           future:
               Provider.of<DiaryList>(context, listen: false).fetchAndSetPages(),
@@ -43,51 +52,11 @@ class MainDiaryScreen extends StatelessWidget {
               builder: (ctx, diaryList, ch) => diaryList.pages.length <= 0
                   ? ch!
                   : Column(children: [
-                      Expanded(
-                        flex: 0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'home',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              style: ButtonStyle(
-                                  splashFactory: NoSplash.splashFactory),
-                            ),
-                            Spacer(),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, AllDiaryScreen.routeName);
-                                },
-                                child: Text(
-                                  'diary',
-                                  style: Theme.of(context).textTheme.headline6,
-                                ),
-                                style: ButtonStyle(
-                                    splashFactory: NoSplash.splashFactory)),
-                            Spacer(),
-                            TextButton(
-                                onPressed: () {
-                                 AdaptiveTheme.of(context).toggleThemeMode();
-                                },
-                                child: Text(
-                                  'settings',
-                                  style: Theme.of(context).textTheme.headline6,
-                                ),
-                                style: ButtonStyle(
-                                    splashFactory: NoSplash.splashFactory)),
-                          ],
-                        ),
-                      ),
                       Padding(padding: EdgeInsets.symmetric(vertical: 7)),
                       cardSwiper(diaryList.pages.length, diaryList),
-                      Padding(padding: EdgeInsets.symmetric(vertical: 15)),
+                      Padding(padding: EdgeInsets.symmetric(vertical: 25)),
                       Container(
-                        height: 65,
+                        height: 92,
                         width: width - 50,
                         child: Column(
                           children: [
@@ -97,16 +66,22 @@ class MainDiaryScreen extends StatelessWidget {
                                   ' PAGES LONG',
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            Padding(padding: EdgeInsets.symmetric(vertical: 4)),
                             Text('stats',
                                 style: Theme.of(context).textTheme.subtitle1),
+                            Align(alignment: Alignment.bottomRight, child:
+                              CupertinoSwitch(
+                                value: isSwitched,
+                                onChanged: (value) {
+                                  isSwitched = value;
+                                  AdaptiveTheme.of(context).toggleThemeMode();
+                                },
+                              ),)
                           ],
                         ),
                       )
                     ]))),
     );
   }
-
   Widget cardSwiper(int pagesLength, DiaryList dList) {
     return Swiper(
       itemBuilder: (BuildContext context, int i) {

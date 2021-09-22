@@ -36,6 +36,7 @@ dependencies:
   shared_preferences: ^2.0.7
   short_uuids: ^2.0.0
   adaptive_theme: ^2.2.0
+  persistent_bottom_nav_bar: ^4.0.2
 
 
   # The following adds the Cupertino Icons font to your application.

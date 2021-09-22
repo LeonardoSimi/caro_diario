@@ -11,6 +11,7 @@ import './screens/all_diary_screen.dart';
 import './screens/auth_screen.dart';
 import './screens/settings_screen.dart';
 import './screens/privacy_policy_screen.dart';
+import './widgets/bottom_nav_bar.dart';
 
 bool _isLocked = false;
 
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
           color: Colors.green,
           theme: theme,
           darkTheme: darkTheme,
-          home: _isLocked ? AuthScreen() : MainDiaryScreen(),
+          home: _isLocked ? AuthScreen() : BottomNavBar(),
           routes: {
             DiaryPage.routeName: (ctx) => DiaryPage(),
             AllDiaryScreen.routeName: (ctx) => AllDiaryScreen(null, null, null, null),

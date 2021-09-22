@@ -80,7 +80,7 @@ class _DiaryPageState extends State<DiaryPage> {
       actions: [
         IconButton(onPressed: addImage, icon: Icon(Icons.add_photo_alternate_outlined))
       ],),
-      bottomNavigationBar: BottomNavBar(),
+      //bottomNavigationBar: BottomNavBar(),
       body: Column(
         children: [
           Center(
