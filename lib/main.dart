@@ -1,3 +1,4 @@
+import 'package:caro_diario/screens/edit_diary_screen.dart';
 import 'package:caro_diario/widgets/diary_list.dart';
 import 'package:caro_diario/widgets/diary_page.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 
 import './screens/main_diary_screen.dart';
 import './screens/page_details_screen.dart';
-import './screens/all_diary_screen.dart';
+import './screens/edit_diary_screen.dart';
 import './screens/auth_screen.dart';
 import './screens/settings_screen.dart';
 import './screens/privacy_policy_screen.dart';
@@ -61,15 +62,16 @@ class MyApp extends StatelessWidget {
       builder: (theme, darkTheme) => ChangeNotifierProvider.value(
         value: DiaryList(),
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Caro Diario',
           color: Colors.green,
           theme: theme,
           darkTheme: darkTheme,
           home: _isLocked ? AuthScreen() : BottomNavBar(),
           routes: {
-            DiaryPage.routeName: (ctx) => DiaryPage(),
-            AllDiaryScreen.routeName: (ctx) => AllDiaryScreen(null, null, null, null),
             MainDiaryScreen.routeName: (ctx) => MainDiaryScreen(),
+            DiaryPage.routeName: (ctx) => DiaryPage(),
+            EditDiaryScreen.routeName: (ctx) => EditDiaryScreen(null, null, null, null),
             SettingsScreen.routeName: (ctx) => SettingsScreen(),
             PrivacyPolicyScreen.routeName: (ctx) => PrivacyPolicyScreen(),
             AuthScreen.routeName: (ctx) => AuthScreen(),

@@ -4,13 +4,13 @@ import 'package:provider/provider.dart';
 import '../models/DPage.dart';
 import '../widgets/diary_list.dart';
 
-class AllDiaryScreen extends StatelessWidget {
+class EditDiaryScreen extends StatelessWidget {
   final String? title;
   final String? body;
   final String? id;
   final String? date;
 
-  AllDiaryScreen(this.title, this.body, this.id, this.date);
+  EditDiaryScreen(this.title, this.body, this.id, this.date);
 
   static const routeName = '/all_diary_screen';
 
@@ -18,7 +18,12 @@ class AllDiaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: Center(child: Text('CARO DIARIO', style: Theme.of(context).textTheme.bodyText1,)),
+          centerTitle: true,
+          title: Text(
+            'Caro diario',
+            style: Theme.of(context).textTheme.headline1,
+            textAlign: TextAlign.center,
+          ),
     elevation: 0,
     backgroundColor: null,
     foregroundColor: null,

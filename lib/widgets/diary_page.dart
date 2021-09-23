@@ -30,6 +30,8 @@ class _DiaryPageState extends State<DiaryPage> {
     _bodyController = TextEditingController();
     _focusNode = new FocusNode();
     _focusNode.addListener(() => print('focusNode updated: hasFocus: ${_focusNode.hasFocus}'));
+    _storedImage = null;
+
   }
 
   @override
@@ -58,16 +60,20 @@ class _DiaryPageState extends State<DiaryPage> {
     Provider.of<DiaryList>(context, listen: false).addPage(
         id.toString(), _titleController.text, _bodyController.text, dateTimeFormatted,);
     print('saved page');
-    Navigator.pushReplacementNamed(context, MainDiaryScreen.routeName);
+    Navigator.of(context, rootNavigator: true).pop(context);
   }
 
   Future<void> addImage() async {
     final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    Provider.of<DiaryList>(context, listen: false).getImagePath(image!);
-    setState(() {
-      _storedImage = File(image.path);
-    });
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      Provider.of<DiaryList>(context, listen: false).getImagePath(image);
+      setState(() {
+        _storedImage = File(image!.path);
+      });
+    }
+    else
+      image = null;
   }
 
   @override

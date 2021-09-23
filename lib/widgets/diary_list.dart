@@ -18,7 +18,7 @@ class DiaryList with ChangeNotifier {
     return [..._pages];
   }
 
-  late String imagePath;
+  String? imagePath;
 
   Future<void> addPage(String nId, String nTitle, String nBody, String dateTime,) async {
     final db = await DBHelper.database();
@@ -39,7 +39,7 @@ class DiaryList with ChangeNotifier {
       'body': newPage.pageBody,
       'date': newPage.dateTime,
       'id': newPage.id,
-      'picture': newPage.pic
+      'picture': newPage.pic != null ? newPage.pic : ''
     });
     print('added page with title ${newPage.title}, ${newPage.id}, ${newPage.pic}');
   }
@@ -68,6 +68,10 @@ class DiaryList with ChangeNotifier {
 
   getImagePath(XFile image) {
     imagePath = image.path;
+
+    if (image.path.isEmpty)
+      imagePath = '';
+
     print(imagePath);
   }
 }

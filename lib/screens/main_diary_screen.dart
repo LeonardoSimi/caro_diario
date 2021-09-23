@@ -8,10 +8,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 
 import '../widgets/diary_page.dart';
 import '../widgets/diary_list.dart';
-import '../widgets/bottom_nav_bar.dart';
 import './page_details_screen.dart';
-import './all_diary_screen.dart';
-import './settings_screen.dart';
 
 class MainDiaryScreen extends StatefulWidget {
   static const routeName = '/main-diary-screen';
@@ -26,22 +23,29 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Center(
-            child: Text(
+        centerTitle: true,
+        title: Text(
           'Caro diario',
           style: Theme.of(context).textTheme.headline1,
               textAlign: TextAlign.center,
-        )),
+        ),
+        actions: [
+          CupertinoSwitch(
+            value: isSwitched,
+            onChanged: (value) {
+              isSwitched = value;
+              AdaptiveTheme.of(context).toggleThemeMode();
+            },
+          ),
+        ],
         elevation: 0,
         backgroundColor: null,
         foregroundColor: null,
       ),
-      //bottomNavigationBar: BottomNavBar(),
       body: FutureBuilder(
           future:
               Provider.of<DiaryList>(context, listen: false).fetchAndSetPages(),
@@ -52,11 +56,11 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
               builder: (ctx, diaryList, ch) => diaryList.pages.length <= 0
                   ? ch!
                   : Column(children: [
-                      Padding(padding: EdgeInsets.symmetric(vertical: 7)),
+                      Padding(padding: const EdgeInsets.symmetric(vertical: 7)),
                       cardSwiper(diaryList.pages.length, diaryList),
-                      Padding(padding: EdgeInsets.symmetric(vertical: 25)),
+                      Padding(padding: const EdgeInsets.symmetric(vertical: 25)),
                       Container(
-                        height: 92,
+                        height: 110,
                         width: width - 50,
                         child: Column(
                           children: [
@@ -66,16 +70,10 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
                                   ' PAGES LONG',
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            Text('stats',
-                                style: Theme.of(context).textTheme.subtitle1),
-                            Align(alignment: Alignment.bottomRight, child:
-                              CupertinoSwitch(
-                                value: isSwitched,
-                                onChanged: (value) {
-                                  isSwitched = value;
-                                  AdaptiveTheme.of(context).toggleThemeMode();
-                                },
-                              ),)
+                            Padding(padding: const EdgeInsets.only(bottom: 30)),
+                            FloatingActionButton(child: Icon(Icons.add_circle_outline_sharp, color: Colors.black,),
+                              onPressed: () => Navigator.of(context).pushNamed(DiaryPage.routeName),
+                              backgroundColor: Colors.white38,),
                           ],
                         ),
                       )
@@ -88,7 +86,7 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
         return Container(
             width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.symmetric(horizontal: 5.0),
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: const BoxDecoration(color: Colors.white),
             child: Container(
               height: 250,
               width: 250,
@@ -107,14 +105,6 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
                   shape: RoundedRectangleBorder(
                       side: BorderSide(width: 1),
                       borderRadius: BorderRadius.circular(7)),
-                  // child: ListTile(
-                  //     title: Text(dList.pages[i].title!, style: Theme.of(context).textTheme.bodyText1, overflow: TextOverflow.ellipsis,),
-                  //     subtitle: Text(dList.pages[i].pageBody!, style: Theme.of(context).textTheme.bodyText1, overflow: TextOverflow.ellipsis, maxLines: 12,),
-                  //     trailing: Text(
-                  //       dList.pages[i].dateTime!,
-                  //       style: TextStyle(color: Colors.grey),
-                  //     ),
-                  //   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
