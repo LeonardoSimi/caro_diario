@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:caro_diario/screens/edit_diary_screen.dart';
 import 'package:caro_diario/widgets/diary_list.dart';
 import 'package:caro_diario/widgets/diary_page.dart';
@@ -27,7 +28,10 @@ Future<void> main() async{
   else
   _isLocked = prefs.getBool('is_locked')!;
 
-  runApp(MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_){
+    runApp(MyApp());
+  });
+
 }
 
 class MyApp extends StatelessWidget {

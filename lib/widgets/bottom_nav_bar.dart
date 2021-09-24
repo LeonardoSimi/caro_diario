@@ -5,6 +5,7 @@ import './diary_page.dart';
 import '../screens/main_diary_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/edit_diary_screen.dart';
+import '../screens/all_diary_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
 
@@ -20,8 +21,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       'title': 'Home',
     },
      {
-       'page': DiaryPage(),
-       'title': 'Add Page',
+       'page': AllDiaryScreen(),
+       'title': 'Your diary',
      },
      {
        'page': EditDiaryScreen(null, null, null, null),

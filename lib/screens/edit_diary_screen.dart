@@ -12,7 +12,7 @@ class EditDiaryScreen extends StatelessWidget {
 
   EditDiaryScreen(this.title, this.body, this.id, this.date);
 
-  static const routeName = '/all_diary_screen';
+  static const routeName = '/edit_diary_screen';
 
   @override
   Widget build(BuildContext context) {
