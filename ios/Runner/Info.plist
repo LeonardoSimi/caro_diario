@@ -27,13 +27,9 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>
+	<string>Interface Orientations required</string>
 	<key>NSFaceIDUsageDescription</key>
-    <string>Why is my app authenticating using face id?</string>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+    <string>Authentication required</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -42,12 +38,12 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<string>Status Bar appearance required</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your gallery to pick a photo.</string>
 	<key>NSCameraUsageDescription</key>
     <string>We need access to your gallery to take a photo.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>We need access to your microphone to get a video.</string>
-	<false/>
 </dict>
 </plist>
