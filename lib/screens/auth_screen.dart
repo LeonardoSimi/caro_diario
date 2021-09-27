@@ -4,6 +4,7 @@ import 'package:local_auth/local_auth.dart';
 
 import '../helpers/authentication.dart';
 import './main_diary_screen.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class AuthScreen extends StatelessWidget {
 
@@ -42,7 +43,7 @@ class AuthScreen extends StatelessWidget {
                           onPressed: () async {
                             isAuthenticated = await Authentication.authenticateWithBiometrics();
                             if (isAuthenticated){
-                              Navigator.of(context).pushReplacementNamed(MainDiaryScreen.routeName);
+                              Navigator.of(context).pushReplacementNamed(BottomNavBar.routeName);
                             }
                             else {
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error during the authentication.')));

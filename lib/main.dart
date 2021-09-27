@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
     return AdaptiveTheme(
       light: ThemeData(
         primaryColor: Colors.white,
+        backgroundColor: Colors.white,
         brightness: Brightness.light,
         fontFamily: 'OpenSans',
         textTheme: TextTheme(
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
             SettingsScreen.routeName: (ctx) => SettingsScreen(),
             PrivacyPolicyScreen.routeName: (ctx) => PrivacyPolicyScreen(),
             AuthScreen.routeName: (ctx) => AuthScreen(),
+            BottomNavBar.routeName: (ctx) => BottomNavBar()
           },
         ),
       ),

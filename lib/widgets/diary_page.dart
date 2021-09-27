@@ -58,7 +58,7 @@ class _DiaryPageState extends State<DiaryPage> {
     DateTime now = DateTime.now();
     String dateTimeFormatted = DateFormat('yMd - kk:mm').format(now);
     Provider.of<DiaryList>(context, listen: false).addPage(
-        id.toString(), _titleController.text, _bodyController.text, dateTimeFormatted,);
+        id.toString(), 'Caro diario, ', _bodyController.text, dateTimeFormatted,);
     print('saved page');
     Navigator.of(context, rootNavigator: true).pop(context);
   }
@@ -89,8 +89,7 @@ class _DiaryPageState extends State<DiaryPage> {
       //bottomNavigationBar: BottomNavBar(),
       body: Column(
         children: [
-          Center(
-            child: Container(
+          Container(
             height: height - 130,
             child: Card(
               child: Stack(
@@ -99,16 +98,19 @@ class _DiaryPageState extends State<DiaryPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            child: TextField(
+/*                            child: TextField(
                               focusNode: _focusNode,
                               controller: _titleController,
                               decoration: new InputDecoration.collapsed(hintText: ''),
-                            ),
+                            ),*/
+                          child: Text('Caro diario, ', textAlign: TextAlign.left,),
                           ),
                           Padding(padding: EdgeInsets.symmetric(vertical: 1)),
                           Container(
+                            width: MediaQuery.of(context).size.width/2,
                             child: TextField(
                               focusNode: _focusNode,
                               controller: _bodyController,
@@ -148,7 +150,6 @@ class _DiaryPageState extends State<DiaryPage> {
               ),
                 ),
               ),
-          ),
             ]
       ),
     );

@@ -50,8 +50,21 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
           future:
               Provider.of<DiaryList>(context, listen: false).fetchAndSetPages(),
           builder: (ctx, snapshot) => Consumer<DiaryList>(
-              child: Center(
-                child: const Text('Start writing about your story.'),
+              child: Stack(
+                children: [
+                  Center(
+                  child: const Text('Start writing about your story.'),
+                ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: FloatingActionButton(child: Icon(Icons.add_circle_outline_sharp, color: Colors.black,),
+                        onPressed: () => Navigator.of(context).pushNamed(DiaryPage.routeName),
+                        backgroundColor: Colors.white38,),
+                    ),
+                  ),
+        ]
               ),
               builder: (ctx, diaryList, ch) => diaryList.pages.length <= 0
                   ? ch!

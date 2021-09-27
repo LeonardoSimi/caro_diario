@@ -11,6 +11,7 @@ class BottomNavBar extends StatefulWidget {
 
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
+  static const routeName = './bottom_nav_bar';
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
