@@ -23,7 +23,6 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -37,8 +36,10 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
           CupertinoSwitch(
             value: isSwitched,
             onChanged: (value) {
-              isSwitched = value;
-              AdaptiveTheme.of(context).toggleThemeMode();
+              setState(() {
+                isSwitched = value;
+                AdaptiveTheme.of(context).toggleThemeMode();
+              });
             },
           ),
         ],
@@ -48,7 +49,7 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
       ),
       body: FutureBuilder(
           future:
-              Provider.of<DiaryList>(context, listen: false).fetchAndSetPages(),
+              Provider.of<DiaryList>(context).fetchAndSetPages(),
           builder: (ctx, snapshot) => Consumer<DiaryList>(
               child: Stack(
                 children: [
