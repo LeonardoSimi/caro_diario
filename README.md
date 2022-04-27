@@ -11,6 +11,10 @@ Caro Diario is an offline diary app for Android and iOS made using Flutter
 - Don't be tracked: the app is always offline
 - Lock your diary with your fingerprint/Face ID/ PIN
 
+![Screenshot_1651078984](https://user-images.githubusercontent.com/91740137/165581753-0f4b854f-8bdf-469c-8c8b-8e65d08ec2ce.png)
+![Screenshot_1651079080](https://user-images.githubusercontent.com/91740137/165581794-57701da9-9735-4455-8a05-9b5791d0eef6.png)
+
+
 Caro Diario is a wip and a little spare-time-project.
 
 ## Dependencies
