@@ -1,4 +1,5 @@
-# Caro Diario
+<img src="assets/images/carodiarioUNC.gif" alt="Caro Diario" width=50% height=50%>
+
 ## A "Secret" offline diary for Android/iOS
 
 Caro Diario is an offline diary app for Android and iOS made using Flutter
