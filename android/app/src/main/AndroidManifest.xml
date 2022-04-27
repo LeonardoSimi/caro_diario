@@ -3,8 +3,8 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
 
     <application
-        android:label="caro_diario"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Caro Diario"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
