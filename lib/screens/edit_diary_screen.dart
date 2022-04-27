@@ -24,32 +24,50 @@ class EditDiaryScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headline1,
             textAlign: TextAlign.center,
           ),
-    elevation: 0,
-    backgroundColor: null,
-    foregroundColor: null,
-    ),
-      body: FutureBuilder( future:  Provider.of<DiaryList>(context, listen: false).fetchAndSetPages(),
-    builder: (ctx, snapshot) => Consumer<DiaryList>(
-    child: Center(
-    child: const Text('Start writing about your story.'),
-    ),
-    builder: (ctx, diaryList, ch) => diaryList.pages.length <= 0
-    ? ch!
-    : ListView.builder(
-    itemCount: diaryList.pages.length,
-    itemBuilder: (context, i) {
-      return Dismissible(
-          direction: DismissDirection.endToStart,
-          onDismissed: (direction){
-            print(diaryList.pages[i].id);
-            DiaryList().deletePages(diaryList.pages[i].id.toString());
-            },
-          key: Key(diaryList.pages[i].id.toString()),
-          child: DPage(id: diaryList.pages[i].id, title: diaryList.pages[i].title, pageBody: diaryList.pages[i].pageBody, dateTime: diaryList.pages[i].dateTime,));
-    }
-    )
-
-      ),
-    ));
+          elevation: 0,
+          backgroundColor: null,
+          foregroundColor: null,
+        ),
+        body: FutureBuilder(
+          future:
+              Provider.of<DiaryList>(context, listen: false).fetchAndSetPages(),
+          builder: (ctx, snapshot) => Consumer<DiaryList>(
+              child: Center(
+                child: const Text('Start writing about your story.'),
+              ),
+              builder: (ctx, diaryList, ch) => diaryList.pages.length <= 0
+                  ? ch!
+                  : ListView.builder(
+                      itemCount: diaryList.pages.length,
+                      itemBuilder: (context, i) {
+                        return Dismissible(
+                            background: Container(
+                              color: Colors.red,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Icon(
+                                      Icons.delete_outline_sharp,
+                                      color: Colors.white,
+                                      size: 42,
+                                    )),
+                              ),
+                            ),
+                            direction: DismissDirection.endToStart,
+                            onDismissed: (direction) {
+                              print(diaryList.pages[i].id);
+                              DiaryList().deletePages(
+                                  diaryList.pages[i].id.toString());
+                            },
+                            key: Key(diaryList.pages[i].id.toString()),
+                            child: DPage(
+                              id: diaryList.pages[i].id,
+                              title: diaryList.pages[i].title,
+                              pageBody: diaryList.pages[i].pageBody,
+                              dateTime: diaryList.pages[i].dateTime,
+                            ));
+                      })),
+        ));
   }
 }

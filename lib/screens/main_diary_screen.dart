@@ -18,7 +18,7 @@ class MainDiaryScreen extends StatefulWidget {
 }
 
 class _MainDiaryScreenState extends State<MainDiaryScreen> {
-  bool isSwitched = false;
+  late bool isSwitched;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,9 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
               textAlign: TextAlign.center,
         ),
         actions: [
-          CupertinoSwitch(
+          IconButton(onPressed: () => AdaptiveTheme.of(context).setLight(), icon: Icon(Icons.wb_sunny)),
+          IconButton(onPressed: () => AdaptiveTheme.of(context).setDark(), icon: Icon(Icons.nightlight_round)),
+/*          CupertinoSwitch(
             value: isSwitched,
             onChanged: (value) {
               setState(() {
@@ -41,7 +43,7 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
                 AdaptiveTheme.of(context).toggleThemeMode();
               });
             },
-          ),
+          ),*/
         ],
         elevation: 0,
         backgroundColor: null,
@@ -69,9 +71,9 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
               ),
               builder: (ctx, diaryList, ch) => diaryList.pages.length <= 0
                   ? ch!
-                  : Column(children: [
-                      Padding(padding: const EdgeInsets.symmetric(vertical: 7)),
-                      cardSwiper(diaryList.pages.length, diaryList),
+                  : Column(
+                  children: [
+                      Container(child: cardSwiper(diaryList.pages.length, diaryList)),
                       Padding(padding: const EdgeInsets.symmetric(vertical: 25)),
                       Container(
                         height: 110,
@@ -97,14 +99,7 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
   Widget cardSwiper(int pagesLength, DiaryList dList) {
     return Swiper(
       itemBuilder: (BuildContext context, int i) {
-        return Container(
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.symmetric(horizontal: 5.0),
-            decoration: const BoxDecoration(color: Colors.white),
-            child: Container(
-              height: 250,
-              width: 250,
-              child: GestureDetector(
+        return GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context,
@@ -117,27 +112,26 @@ class _MainDiaryScreenState extends State<MainDiaryScreen> {
                 },
                 child: Card(
                   shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1),
-                      borderRadius: BorderRadius.circular(7)),
+                      side: BorderSide(width: 1, color: Colors.black12),
+                      borderRadius: BorderRadius.circular(60)),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       children: [
                           Align(alignment: Alignment.topCenter ,child: Text(dList.pages[i].title!, style: Theme.of(context).textTheme.bodyText2, overflow: TextOverflow.ellipsis,)),
-                          Align(alignment: Alignment.topRight ,child: Text( dList.pages[i].dateTime!, style: TextStyle(color: Colors.grey, fontSize: 14),)),
+                          Align(alignment: Alignment.topRight ,child: Text( dList.pages[i].dateTime!, style: TextStyle(color: Colors.grey, fontSize: 14))),
                         Padding(padding: EdgeInsets.only(bottom: 2)),
                         Text(
                           dList.pages[i].pageBody!,
                           style: Theme.of(context).textTheme.bodyText1,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 10,
+                          maxLines: 4,
                         ),
                       ],
                     ),
                   ),
                 ),
-              ),
-            ));
+              );
       },
       itemCount: pagesLength,
       itemWidth: 400,
